@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Project {
@@ -12,7 +13,7 @@ public class Project {
 
     private String dueDate;
 
-    private List<Employee> employeeList;
+    public List<Employee> employeeList = new ArrayList<>();
 
     //
 
@@ -48,6 +49,9 @@ public class Project {
             setDescription(description);
             setStartDate(startDate);
             setDueDate(dueDate);
+            this.employeeList = new ArrayList<>(employeeList);
 
     }
+
+
 }
