@@ -5,7 +5,8 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String email;
-    private static double salary = 60000.00;
+    private double salary;
+    private static final double startingSalary = 60000.00;
     private Department department;
     private String hireDate;
 
@@ -76,8 +77,10 @@ public class Employee {
         setEmail(email);
         setDepartment(department);
         setHireDate(hireDate);
+        salary = startingSalary;
     }
     public Employee () {
+        salary = startingSalary;
     }
     //other methods
     public String getFullName() {

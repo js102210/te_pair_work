@@ -1,8 +1,9 @@
 package com.techelevator;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Handler;
+import java.util.Map;
 
 public class Application {
     private List<Department> departments = new ArrayList<>();
@@ -76,11 +77,15 @@ public class Application {
             Dean.setEmail("djohnson@teams.com");
             Dean.setDepartment(departments.get(2));
             Dean.setHireDate("08/21/2020");
-            employees.add(Dean);
 
-            Employee Angie = new Employee(002,"Angie", "Smith", "asmith@teams.com", departments.get(2), "08/21/2020" );
+
+            Employee Angie = new Employee(002,"Angie", "Smith",
+                    "asmith@teams.com", departments.get(2), "08/21/2020" );
+            Employee Margaret = new Employee(003, "Margaret", "Thompson",
+                    "mthompson@teams.com", departments.get(0), "08/21/2020" );
+
             employees.add(Angie);
-            Employee Margaret = new Employee(003, "Margaret", "Thompson", "mthompson@teams.com", departments.get(0), "08/21/2020" );
+            employees.add(Dean);
             employees.add(Margaret);
 
             Angie.raiseSalary(10);
@@ -91,14 +96,17 @@ public class Application {
     private void printEmployees() {
             System.out.println("\n------------- Employees ------------------------------");
             for (Employee employee : employees) {
-                System.out.println(employee.getFullName()+ " " + employee.getSalary());
+                System.out.println(employee.getFullName() + " " + "(" + employee.getSalary() + ")" + " " + employee.getDepartment().getName());
             }
         }
 
     /**
      * Create the 'TEams' project.
      */
+    Map<String, Project> projects = new HashMap<>();
     private void createTeamsProject() {
+        new Project("TEams", "Project Managment Software",
+                "10/10/2020", "11/10/2020");
 
     }
 
