@@ -142,12 +142,15 @@ public class Application {
 
     }
 
+
     /**
      * Print out each project in the collection.
      */
     private void printProjectsReport() {
         System.out.println("\n------------- PROJECTS ------------------------------");
-       System.out.println(projects.get(0));
+       for (Map.Entry<String, Project> project : projects.entrySet()) {
+           System.out.println(project.getKey());
+        }
     }
 
 }
