@@ -105,10 +105,21 @@ public class Application {
      */
     Map<String, Project> projects = new HashMap<>();
     private void createTeamsProject() {
-        new Project("TEams", "Project Managment Software",
+        Project TEams = new Project("TEams", "Project Managment Software",
                 "10/10/2020", "11/10/2020");
+        //TEams.addEmployees(Angie);
+        System.out.println(TEams.employeeList());
+      //  TEams.addEmployees(employees.get(1));
+
+     for (Employee employee: employees ) {
+         String employeeDepartment = employee.getDepartment().getName();
+       if (employeeDepartment.equals("Engineering")) {
+              TEams.addEmployees(employee);
+        }
+      }
 
     }
+
 
     /**
      * Create the 'Marketing Landing Page' project.
@@ -122,7 +133,7 @@ public class Application {
      */
     private void printProjectsReport() {
         System.out.println("\n------------- PROJECTS ------------------------------");
-
+        //System.out.println(employees.get(0));
     }
 
 }

@@ -26,7 +26,7 @@ public class Project {
             return this.startDate;
     }
     public String getDueDate(){ return this.dueDate; }
-    public List<Employee> employeeList(){ return this.employeeList; }
+    public List<Employee> getEmployeeList(){ return this.employeeList; }
 
     //
 
@@ -48,5 +48,6 @@ public class Project {
             setDescription(description);
             setStartDate(startDate);
             setDueDate(dueDate);
+
     }
 }
