@@ -1,13 +1,21 @@
 package com.techelevator;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.NumberFormat;
+import java.util.*;
 
 public class Application {
     private List<Department> departments = new ArrayList<>();
     private List<Employee> employees = new ArrayList<>();
+    private Department getDepartmentByName(String deptName) {
+        Department result = null;
+        for (Department department : departments) {
+            if (department.getName().equals(deptName)) {
+                result = department;
+            }
+        }
+        return result;
+    }
+
 
     /**
      * The main entry point in the application
@@ -18,6 +26,7 @@ public class Application {
         Application app = new Application();
         app.run();
     }
+
 
 
     private void run() {
@@ -58,6 +67,11 @@ public class Application {
 
     }
 
+
+
+
+
+
     /**
      * Print out each department in the collection.
      */
@@ -77,14 +91,14 @@ public class Application {
         Dean.setFirstName("Dean");
         Dean.setLastName("Johnson");
         Dean.setEmail("djohnson@teams.com");
-        Dean.setDepartment(departments.get(2));
+        Dean.setDepartment(getDepartmentByName("Engineering"));
         Dean.setHireDate("08/21/2020");
 
 
         Employee Angie = new Employee(002, "Angie", "Smith",
-                "asmith@teams.com", departments.get(2), "08/21/2020");
+                "asmith@teams.com", getDepartmentByName("Engineering"), "08/21/2020");
         Employee Margaret = new Employee(003, "Margaret", "Thompson",
-                "mthompson@teams.com", departments.get(0), "08/21/2020");
+                "mthompson@teams.com", getDepartmentByName("Marketing"), "08/21/2020");
 
         employees.add(Angie);
         employees.add(Dean);
@@ -99,7 +113,10 @@ public class Application {
     private void printEmployees() {
         System.out.println("\n------------- Employees ------------------------------");
         for (Employee employee : employees) {
-            System.out.println(employee.getFullName() + " " + "(" + employee.getSalary() + ")" + " " + employee.getDepartment().getName());
+            NumberFormat salaryFormatter = NumberFormat.getCurrencyInstance(Locale.US);
+            double salaryString = employee.getSalary();
+            String formattedSalary = salaryFormatter.format(salaryString);
+            System.out.println(employee.getFullName() + " " + "(/" + formattedSalary + ")" + " " + employee.getDepartment().getName());
         }
     }
 
@@ -110,7 +127,7 @@ public class Application {
 
     private void createTeamsProject() {
         Project TEams = new Project("TEams", "Project Managment Software",
-                "10/10/2020", "11/10/2020");
+                0, 30);
 
 
         //  TEams.addEmployees(employees.get(1));
@@ -131,7 +148,7 @@ public class Application {
      */
     private void createLandingPageProject() {
         Project marketingLandingPage = new Project("Marleting Landing Page", "Lead Capture Landing Page for Marketing",
-                "10/10/2020", "10/17/2020");
+                31, 38);
         for (Employee employee : employees) {
             String employeeDepartment = employee.getDepartment().getName();
             if (employeeDepartment.equals("Marketing")) {
@@ -149,7 +166,8 @@ public class Application {
     private void printProjectsReport() {
         System.out.println("\n------------- PROJECTS ------------------------------");
        for (Map.Entry<String, Project> project : projects.entrySet()) {
-           System.out.println(project.getKey());
+           System.out.println(project.getKey() + " " + project.getValue().getEmployeeList().size());
+
         }
     }
 

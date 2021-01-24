@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +10,11 @@ public class Project {
 
     private String description;
 
-    private String startDate;
+    private LocalDate startDate = defaultStartDate;
 
-    private String dueDate;
+    private static LocalDate defaultStartDate = LocalDate.now();
+
+    private LocalDate dueDate = LocalDate.now();
 
     public List<Employee> employeeList = new ArrayList<>();
 
@@ -23,10 +26,10 @@ public class Project {
     public String getDescription(){
             return this.description;
     }
-    public String getStartDate(){
+    public LocalDate getStartDate(){
             return this.startDate;
     }
-    public String getDueDate(){ return this.dueDate; }
+    public LocalDate getDueDate(){ return this.dueDate; }
     public List<Employee> getEmployeeList(){ return this.employeeList; }
 
     //
@@ -37,18 +40,16 @@ public class Project {
     public void setDescription(String description){
             this.description = description;
     }
-    public void setStartDate(String startDate){
-            this.startDate = startDate;
-    }
-    public void setDueDate(String dueDate){
-            this.dueDate = dueDate;
+    public void setStartDate(Long  daysFromTodayToStart){ this.startDate = this.startDate.plusDays(daysFromTodayToStart); }
+    public void setDueDate(Long lengthOfProject){
+            this.dueDate = this.startDate.plusDays(lengthOfProject);
     }
     public void addEmployees(Employee employee) {this.employeeList.add(employee);}
-    public Project(String name, String description, String startDate, String dueDate){
+    public Project(String name, String description, long daysFromTodayToStart, long lengthOfProject){
             setName(name);
             setDescription(description);
-            setStartDate(startDate);
-            setDueDate(dueDate);
+            setStartDate(daysFromTodayToStart);
+            setDueDate(lengthOfProject);
             this.employeeList = new ArrayList<>(employeeList);
 
     }
