@@ -41,8 +41,7 @@ public class Project {
             this.description = description;
     }
     public void setStartDate(Long  daysFromTodayToStart){ this.startDate = this.startDate.plusDays(daysFromTodayToStart); }
-    public void setDueDate(Long lengthOfProject){
-            this.dueDate = this.startDate.plusDays(lengthOfProject);
+    public void setDueDate(Long daysFromStartDate){ this.dueDate = this.startDate.plusDays(daysFromStartDate);
     }
     public void addEmployees(Employee employee) {this.employeeList.add(employee);}
     public Project(String name, String description, long daysFromTodayToStart, long lengthOfProject){

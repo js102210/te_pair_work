@@ -11,6 +11,7 @@ public class Application {
         for (Department department : departments) {
             if (department.getName().equals(deptName)) {
                 result = department;
+
             }
         }
         return result;
@@ -82,6 +83,7 @@ public class Application {
         }
     }
 
+
     /**
      * Create employees and add them to the collection of employees
      */
@@ -93,6 +95,7 @@ public class Application {
         Dean.setEmail("djohnson@teams.com");
         Dean.setDepartment(getDepartmentByName("Engineering"));
         Dean.setHireDate("08/21/2020");
+
 
 
         Employee Angie = new Employee(002, "Angie", "Smith",
@@ -114,8 +117,8 @@ public class Application {
         System.out.println("\n------------- Employees ------------------------------");
         for (Employee employee : employees) {
             NumberFormat salaryFormatter = NumberFormat.getCurrencyInstance(Locale.US);
-            double salaryString = employee.getSalary();
-            String formattedSalary = salaryFormatter.format(salaryString);
+            double salaryDouble = employee.getSalary();
+            String formattedSalary = salaryFormatter.format(salaryDouble);
             System.out.println(employee.getFullName() + " " + "(/" + formattedSalary + ")" + " " + employee.getDepartment().getName());
         }
     }
@@ -147,7 +150,7 @@ public class Application {
      * Create the 'Marketing Landing Page' project.
      */
     private void createLandingPageProject() {
-        Project marketingLandingPage = new Project("Marleting Landing Page", "Lead Capture Landing Page for Marketing",
+        Project marketingLandingPage = new Project("Marketing Landing Page", "Lead Capture Landing Page for Marketing",
                 31, 38);
         for (Employee employee : employees) {
             String employeeDepartment = employee.getDepartment().getName();
@@ -166,7 +169,7 @@ public class Application {
     private void printProjectsReport() {
         System.out.println("\n------------- PROJECTS ------------------------------");
        for (Map.Entry<String, Project> project : projects.entrySet()) {
-           System.out.println(project.getKey() + " " + project.getValue().getEmployeeList().size());
+           System.out.println(project.getKey() + ": " + project.getValue().getEmployeeList().size());
 
         }
     }
