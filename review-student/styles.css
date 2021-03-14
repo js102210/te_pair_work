@@ -193,16 +193,89 @@ main, section, footer {
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #00afef;}
 
-@media only screen and( max-width:800px) {
-    ul {      
-      flex-direction: column;
+.submit-btn{
+    width: 25%;
+    padding: 10px;
+    border-radius: 5px;
+    color: #000000;
+    background-color: #00afef;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+
+}
+
+@media only screen and (max-width: 800px) {
+
+    *{
+        border:   2px dotted red;
     }
+        
     nav ul li {
+        justify-content: space-between;
+        flex-direction: column;
       list-style: none;
       background-color: #00afef;
       line-height: 20px;
       width: 50%;
       border-radius: 5px;
       text-align: center;
+      max-width: 30%;
     }
+
+    nav ul {
+        justify-content: space-between;
+        
+
+    }
+
+    body {
+        display :grid;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+                "header"
+                "nav"
+                "content"
+                "event"
+                "store"
+                "footer";
+    }
+
+
+    #content{
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+        flex-basis: 100%;
+        
+       
+    }
+    #content img{
+        width:85%;
+        object-fit:fill;
+    }
+
+    #event {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: 
+        "blue-popsicle-img event-header"
+        "event-description event-description";
+        padding: 0;
+       
+    }
+
+    #blue-popsicle{
+        grid-area: blue-popsicle-img;
+    }
+
+    #event-header {
+        grid-area: event-header;
+    }
+    #event-description {
+        grid-area: event-description;
+    }
+
+
 }
+
