@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Contact Us</title>
+</head>
+<body>
+    <body>
+        <header>
+            <img id="popsicle-logo" src="images/te-pops.png" alt="TE logo but it's a popsicle" />
+            <h1>Tech Elevator Popsicles</h1>
+        </header>
+        <nav>
+            <ul>
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li>
+                    <a href="#">Store</a>
+                </li>
+                <li>
+                    <a href="contact-us.html">Contact Us</a>
+                </li>
+            </ul>
+        </nav>
+
+    <main>
+        <h2>Contact Us</h2>
+        <form method="POST" action="/api/contactUs">
+            <div>
+                <label for="name">Name:</label>
+                <input id="memberName" name="memberName" type="text" required>
+            </div>
+            <div class="dropdown">
+                <label for="howDidYouHear">How did you hear of us?</label>
+                <button class="dropbtn">Please Select From the Following</button>
+                <div class="dropdown-content">
+                  <a href="#">Popsicle Monthly</a>
+                  <a href="#">Frozen Food Quarterly</a>
+                  <a href="#">Oprah Magazine</a>
+                  <a href="#">Our hilarious commercials featuring Guy Fieri and Danny DeVito</a>
+                </div>
+              </div>
+
+            <div>
+                <label for="favoriteColor">What color is your favorite popsicle?:</label>
+                <input id="favoriteColor" name="favoriteColor" type="color" value="#ff0000">
+            </div>
+            <div>
+                <label for="comments">Please let us know any comments you have:</label>
+                <input id="comments" name="comments" type="text">
+            </div>
+            
+            <div>
+                <input type="submit">
+            </div>
+
+        </form>
+    </main>
+    <footer id="footer"><span>&#169;</span>Tech Elevator 2020</footer>
+</body>
+</html>
