@@ -15,7 +15,7 @@ body {
     "content content"
     "event store"
     "footer footer";
-   
+   grid-gap: 10px;
 }   
 
 header{
