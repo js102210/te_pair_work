@@ -1,7 +1,4 @@
-*{
-    border: orangered 2px dotted;
 
-}
 
 body {
     font-family: Arial, Helvetica, sans-serif;
@@ -74,8 +71,12 @@ nav ul {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
-   
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+nav ul li a {
+    text-decoration: none;
 }
 
 nav ul li {
@@ -139,7 +140,10 @@ main, section, footer {
     align-items: center;
     margin-left: 10px;
     margin-right: 10px;
+}
 
+#store ul li a {
+    text-decoration: none;
 }
 
 #popsicle-logo{
@@ -188,3 +192,17 @@ main, section, footer {
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {background-color: #00afef;}
+
+@media only screen and( max-width:800px) {
+    ul {      
+      flex-direction: column;
+    }
+    nav ul li {
+      list-style: none;
+      background-color: #00afef;
+      line-height: 20px;
+      width: 50%;
+      border-radius: 5px;
+      text-align: center;
+    }
+}
