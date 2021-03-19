@@ -1,6 +1,8 @@
 //define global variables for first and second digits of operation
 left = 0;
 right = 0;
+//currentOperator = '*';
+let problemSet = [];
 //define types of operations and what they should return for the two digits
 const operators = {
     '+' : function (a, b) {return a + b},
@@ -39,6 +41,8 @@ function shuffleArray(arr) {
       changeLeftAndRight();
       const problem = {
         //references global operators against the one passed in to apply the correct operation to the current left/right digits
+        leftOperand : left,
+        rightOperand : right,
         answer : (operators[operatorSymbol](left, right)),
         opSymbol : operatorSymbol,
         //calls the same operation on random digits between 1-10 to produce possible but incorrect results for the other three choices
@@ -50,7 +54,7 @@ function shuffleArray(arr) {
       validatorArr = [problem.answer, problem.wrong1, problem.wrong2, problem.wrong3];
       for (let i = 1; i < validatorArr.length; i++){
         element = validatorArr[i];
-        if (validatorArr.indexOf(element) != validatorArr.lastIndexOf(element)){
+        if (validatorArr.indexOf(element) != validatorArr.lastIndexOf(element) || element == problem.answer){
           element = (operators[operatorSymbol](getRandomNumber(10), getRandomNumber(10)));
         }
       }
@@ -68,7 +72,7 @@ function shuffleArray(arr) {
     answer = problem.answer;
     opSymbol = problem.opSymbol;
     screen =  document.querySelector('section div');
-    screen.innerText = innerText = left + ' ' + opSymbol +  ' ' + right;
+    screen.innerText = innerText = problem.leftOperand + ' ' + opSymbol +  ' ' + problem.rightOperand;
     arr =  [problem.answer, problem.wrong1, problem.wrong2, problem.wrong3];
     shuffleArray(arr);
     i = 0;
@@ -80,20 +84,29 @@ function shuffleArray(arr) {
         })
   }
 
-  /*
-  function generateAndDisplayProblem(){
-      const left = getRandomNumber(10);
-      const right = getRandomNumber(10);
-      const answer = left * right;
-      problem = document.querySelector('section div');
-      problem.innerText = left + ' ' + operator + ' ' + right;
-    arr =  [answer, getRandomNumber(81), getRandomNumber(81), getRandomNumber(81)];
-    shuffleArray(arr);
-    boxes = document.querySelectorAll('li')
-        i = 0
-        boxes.forEach((element) => {
-            element.innerText = arr[i];
-            i++;
-        })
+  /**create a set of ten problems
+   * currently hard-coded for them all to be multiplication
+   */
+function createProblemSet(){
+ i = 1;
+ while (i <=10 ){
+   problem = makeProblem('*');  //come back to this
+   problemSet.push(problem);
+   i++;
+ }
+}
 
-  } */
+function clearProblemSet(){
+  problemSet.forEach((element) => {
+    problemSet.remove(element);
+  })
+}
+
+function showNextProblemInSet(){
+  //determine current problem based on value in html element
+  let currentProblem = document.querySelector('.currentProblem').innerText;
+  nextProblem = parseInt(currentProblem) + 1;
+  //reference the global problemSet to get and display the next problem
+  displayProblem(problemSet[currentProblem -1]);
+  document.querySelector('.currentProblem').innerText = nextProblem;
+}
