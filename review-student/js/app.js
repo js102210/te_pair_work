@@ -1,6 +1,8 @@
 //define global variables for first and second digits of operation
 left = 0;
 right = 0;
+
+
 //currentOperator = '*';
 let problemSet = [];
 //define types of operations and what they should return for the two digits
@@ -32,6 +34,42 @@ function shuffleArray(arr) {
     right = getRandomNumber(10);
   }
 
+/**check for duplicates in an array
+ * 
+ * @param {array} arr 
+ * @returns true if the array has duplicates, false if not
+ */
+  function containsDupes(arr){
+    result = false;
+    arr.forEach((element) => {
+      if (arr.indexOf(element) != arr.lastIndexOf(element)){
+        result = true;
+      }
+    });
+    return result;
+  }
+
+  /**turn the answer properties of a problem object into an array so we can check for duplicates
+   * 
+   * @param {problem object} problem 
+   * @returns an array containing the problem's answer properties, starting with the correct answer, then the three wrong ones
+   */
+  function makeProblemArr(problem){
+    return [problem.answer, problem.wrong1, problem.wrong2, problem.wrong3];
+  }
+
+  /**randomizes the wrong answers in a problem object to another possible value ('possible' being determined by the problem's operator)
+   * 
+   * @param {problem object} problem 
+   * @param {operator for the problem object ('+','-','/','*') operatorSymbol 
+   */
+  function rerollWrongs(problem, operatorSymbol){
+    problem.wrong1 = operators[operatorSymbol](getRandomNumber(10), getRandomNumber(10));
+    problem.wrong2 = operators[operatorSymbol](getRandomNumber(10), getRandomNumber(10));
+    problem.wrong3 = operators[operatorSymbol](getRandomNumber(10), getRandomNumber(10));
+  }
+
+
 /**
  * generates a new problem given an operator symbol
  * @param {String} operatorSymbol string value of the operator for the problem. Should correspond to defined globally defined perators: '+','-','*','/'
@@ -51,15 +89,15 @@ function shuffleArray(arr) {
         wrong3 : (operators[operatorSymbol](getRandomNumber(10), getRandomNumber(10)))
       }
       //remove duplicates from the array to prevent duplicate wrong answers, and to prevent any wrong selections from matching the right answer
-      validatorArr = [problem.answer, problem.wrong1, problem.wrong2, problem.wrong3];
-      for (let i = 1; i < validatorArr.length; i++){
-        element = validatorArr[i];
-        if (validatorArr.indexOf(element) != validatorArr.lastIndexOf(element) || element == problem.answer){
-          element = (operators[operatorSymbol](getRandomNumber(10), getRandomNumber(10)));
-        }
+      let validatorArr = makeProblemArr(problem);
+      while(containsDupes(validatorArr)){
+        rerollWrongs(problem, operatorSymbol);
+        validatorArr = makeProblemArr(problem);
       }
+      
       return problem;
   }
+
 
 
 /**
@@ -90,7 +128,7 @@ function shuffleArray(arr) {
 function createProblemSet(){
  i = 1;
  while (i <=10 ){
-   problem = makeProblem('*');  //come back to this
+   problem = makeProblem('*');  //@TODO come back to this
    problemSet.push(problem);
    i++;
  }
@@ -102,11 +140,51 @@ function clearProblemSet(){
   })
 }
 
+function getCurrentlySelectedProblem(){
+  return document.querySelector('.currentProblem').innerText;
+}
+function getCurrentScore(){
+  return document.querySelector('.currentScore').innerText;
+}
+
+function showFirstProblem(){
+  displayProblem(problemSet[0]);
+}
+
 function showNextProblemInSet(){
   //determine current problem based on value in html element
-  let currentProblem = document.querySelector('.currentProblem').innerText;
+  let currentProblem = getCurrentlySelectedProblem();
   nextProblem = parseInt(currentProblem) + 1;
   //reference the global problemSet to get and display the next problem
-  displayProblem(problemSet[currentProblem -1]);
+  displayProblem(problemSet[currentProblem]);
   document.querySelector('.currentProblem').innerText = nextProblem;
 }
+
+function evaluateAnswer(event){
+  problemObject = problemSet[getCurrentlySelectedProblem()-1];
+  let score = getCurrentScore();
+  //nextScore = parseInt(score) + 1;
+ // valSelected =  parseInt(event.target.innerText)
+ // valCorrect = problemObject.answer
+  isRight = (parseInt(event.target.innerText) == problemObject.answer);
+  if (isRight){
+   document.querySelector('.currentScore').innerText = parseInt(score) + 1;
+  }
+  showNextProblemInSet();
+
+}
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+createProblemSet();
+showFirstProblem();
+const displayedChoices = document.querySelectorAll('#answers li');
+displayedChoices.forEach((element) => {
+  element.addEventListener('click', (event) => evaluateAnswer(event))
+})
+
+
+
+})
