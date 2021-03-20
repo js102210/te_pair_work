@@ -102,7 +102,7 @@ function shuffleArray(arr) {
 
 /**
  * displays the current problem on the screen, along with the possible answers
- * @param {*} problem 
+ * @param {problem object} problem 
  */
   function displayProblem(problem){
     /*left = problem.left;
@@ -134,23 +134,39 @@ function createProblemSet(){
  }
 }
 
+/**
+ * Clears the current set of problems 
+ */
 function clearProblemSet(){
   problemSet.forEach((element) => {
     problemSet.remove(element);
   })
 }
 
+/**
+ * get the number corresponding to the current problem displayed
+ * @returns the number associated with the current problem in the set
+ */
 function getCurrentlySelectedProblem(){
   return document.querySelector('.currentProblem').innerText;
 }
+/**
+ * get how many problems in the current set the user has answered correctly
+ * @returns the number of problems in the current set the user has answered correctly
+ */
 function getCurrentScore(){
   return document.querySelector('.currentScore').innerText;
 }
 
+/**
+ * display the first problem in the current set
+ */
 function showFirstProblem(){
   displayProblem(problemSet[0]);
 }
-
+/**
+ * display the next problem in the current set
+ */
 function showNextProblemInSet(){
   //determine current problem based on value in html element
   let currentProblem = getCurrentlySelectedProblem();
@@ -159,13 +175,21 @@ function showNextProblemInSet(){
   displayProblem(problemSet[currentProblem]);
   document.querySelector('.currentProblem').innerText = nextProblem;
 }
-
+/**
+ * clear the current set of problems, set the score to 0 and start a new set
+ */
+function beginNewSet(){
+  clearProblemSet();
+  createProblemSet();
+  showFirstProblem();
+}
+/**
+ * evaluate if the user's selected answer was correct, increment the score if it was, and display the next problem in the set
+ * @param {click event on a possible answer} event 
+ */
 function evaluateAnswer(event){
   problemObject = problemSet[getCurrentlySelectedProblem()-1];
   let score = getCurrentScore();
-  //nextScore = parseInt(score) + 1;
- // valSelected =  parseInt(event.target.innerText)
- // valCorrect = problemObject.answer
   isRight = (parseInt(event.target.innerText) == problemObject.answer);
   if (isRight){
    document.querySelector('.currentScore').innerText = parseInt(score) + 1;
@@ -184,7 +208,8 @@ const displayedChoices = document.querySelectorAll('#answers li');
 displayedChoices.forEach((element) => {
   element.addEventListener('click', (event) => evaluateAnswer(event))
 })
-
+const startOverBtn = document.getElementById('btnStartOver');
+startOverBtn.addEventListener('click', beginNewSet);
 
 
 })
