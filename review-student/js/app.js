@@ -5,7 +5,7 @@ right = 0;
 sizeOfSet = 10;
 
 let eligibleOperators = [];
-//currentOperator = '*';
+
 let problemSet = [];
 //define types of operations and what they should return for the two digits
 const operators = {
