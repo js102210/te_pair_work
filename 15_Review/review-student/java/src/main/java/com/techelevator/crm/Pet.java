@@ -40,17 +40,7 @@ public class Pet {
       this.setSpecies(species);
     }
 
-    //other methods
-  /*  public String listVaccinations(){  <<<<this way seems stupid
-      String result = "";
-      String[] vaccArray = this.getVaccinations().toArray(new String[0]);
-      for(int i = 0; i >= vaccArray.length -2; i++){
-          result += ", " + vaccArray[i];
-      }
-      result += vaccArray[vaccArray.length -1];
 
-      return result;
-    } */
 
     public String listVaccinations() {
         String result = "";
